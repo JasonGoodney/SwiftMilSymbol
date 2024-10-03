@@ -5,17 +5,27 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftMilSymbol",
+    platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "SwiftMilSymbol",
-            targets: ["SwiftMilSymbol"]),
+            targets: ["SwiftMilSymbol"]
+        ),
+    ],
+    dependencies: [
+        .package(url: "https://github.com/swhitty/SwiftDraw.git", from: "0.17.0")
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "SwiftMilSymbol"),
+            name: "SwiftMilSymbol",
+            dependencies: [
+                .product(name: "SwiftDraw", package: "SwiftDraw"),
+            ],
+            resources: [
+                .process("JavaScript/dist/SwiftMilSymbol.bundle.js")
+            ]
+        ),
         .testTarget(
             name: "SwiftMilSymbolTests",
             dependencies: ["SwiftMilSymbol"]),
