@@ -5,7 +5,13 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftMilSymbol",
-    platforms: [.iOS(.v16)],
+    platforms: [
+        .iOS(.v15),
+        .macOS(.v13),
+        .tvOS(.v16),
+        .watchOS(.v10),
+        .visionOS(.v1)
+    ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
