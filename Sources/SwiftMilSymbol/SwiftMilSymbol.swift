@@ -26,8 +26,6 @@ public class MilSymbol {
         }
     }
     
-    public func test() {}
-    
     public func image(
         _ code: String,
         options: [AnyHashable: Any]? = nil
