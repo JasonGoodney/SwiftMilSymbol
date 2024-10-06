@@ -2,7 +2,7 @@
 
 SwiftMilsymbol brings [milsymbol](https://github.com/spatialillusions/milsymbol) to Swift!
 
-![Figure 13](https://github.com/spatialillusions/milsymbol/blob/master/docs/images/milsymbol.png?raw=true)
+![milsymbol](https://github.com/JasonGoodney/SwiftMilSymbol/blob/main/Resources/milsymbol.png?raw=true)
 
 ```swift
 MilSymbol.shared.image("sfgpewrh--mt", options: [
@@ -17,15 +17,22 @@ MilSymbol.shared.image("sfgpewrh--mt", options: [
 ])
 ```
 
-Compared to reference figure from MIL-STD-2525C:
+Compared to the reference figure from MIL-STD-2525C:
 
-![Figure 13](https://github.com/spatialillusions/milsymbol/blob/master/docs/images/figure13.png?raw=true)
+![Figure 13](https://github.com/JasonGoodney/SwiftMilSymbol/blob/main/Resources/figure13.png?raw=true)
+
 
 ## Installation
 SwiftMilSymbol can be installed with Swift Package Manager:
 ```
 https://github.com/JasonGoodney/SwiftMilSymbol.git
 ```
+
+## Preview
+<p align="center">
+  <img src="Resources/options%20example.png" width=400 />
+  <img src="Resources/collection%20example.gif" width=400 />
+</p>
 
 ## Credits
 
