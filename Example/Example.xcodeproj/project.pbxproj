@@ -13,6 +13,8 @@
 		D72CA0AA2CA7633E00BC0776 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CA0A92CA7633E00BC0776 /* ContentView.swift */; };
 		D72CA0AF2CA7650400BC0776 /* SymbolIdentificationCodes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CA0AE2CA7650400BC0776 /* SymbolIdentificationCodes.swift */; };
 		D7A236372CAEBD2300AADED9 /* SwiftMilSymbol in Frameworks */ = {isa = PBXBuildFile; productRef = D7A236362CAEBD2300AADED9 /* SwiftMilSymbol */; };
+		D7CC7A7C2CB2EEF50066F622 /* GridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC7A7B2CB2EEF00066F622 /* GridView.swift */; };
+		D7CC7A7E2CB2F0330066F622 /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CC7A7D2CB2F0320066F622 /* OptionsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		D72CA09E2CA7628800BC0776 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D72CA0A92CA7633E00BC0776 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D72CA0AE2CA7650400BC0776 /* SymbolIdentificationCodes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SymbolIdentificationCodes.swift; sourceTree = "<group>"; };
+		D7CC7A7B2CB2EEF00066F622 /* GridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridView.swift; sourceTree = "<group>"; };
+		D7CC7A7D2CB2F0320066F622 /* OptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 			children = (
 				D72CA0AE2CA7650400BC0776 /* SymbolIdentificationCodes.swift */,
 				D72CA0A92CA7633E00BC0776 /* ContentView.swift */,
+				D7CC7A7B2CB2EEF00066F622 /* GridView.swift */,
+				D7CC7A7D2CB2F0320066F622 /* OptionsView.swift */,
 				D72CA0972CA7628800BC0776 /* ExampleApp.swift */,
 				D72CA09B2CA7628800BC0776 /* Assets.xcassets */,
 				D72CA09D2CA7628800BC0776 /* Preview Content */,
@@ -157,7 +163,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D72CA0AF2CA7650400BC0776 /* SymbolIdentificationCodes.swift in Sources */,
+				D7CC7A7E2CB2F0330066F622 /* OptionsView.swift in Sources */,
 				D72CA0AA2CA7633E00BC0776 /* ContentView.swift in Sources */,
+				D7CC7A7C2CB2EEF50066F622 /* GridView.swift in Sources */,
 				D72CA0982CA7628800BC0776 /* ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
