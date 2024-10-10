@@ -20,6 +20,11 @@ struct ContentView: View {
                 .tabItem {
                     Label("Grid", systemImage: "square.grid.3x3")
                 }
+            
+            MilStd2525CView()
+                .tabItem {
+                    Label("MilStd2525C", systemImage: "square.grid.3x1.below.line.grid.1x2.fill")
+                }
         }
     }
 }
