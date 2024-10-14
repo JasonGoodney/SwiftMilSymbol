@@ -116,50 +116,8 @@ public enum StandardIdentity: String, Codable, CaseIterable, Identifiable, Custo
     }
 }
 
-public enum BattleDimension: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
-    public var id: BattleDimension { self }
-    
-    /// Unknown (Z)
-    case z = "Z"
-    
-    /// Space (P)
-    case p = "P"
-    
-    /// Air (A)
-    case a = "A"
-    
-    /// Ground (G)
-    case g = "G"
-    
-    /// Sea Surface (S)
-    case s = "S"
-    
-    /// Subsurface (U)
-    case u = "U"
-    
-    /// SOF (F)
-    case f = "F"
-    
-    public var name: String {
-        switch self {
-        case .z:
-            "Unknown"
-        case .p:
-            "Space"
-        case .a:
-            "Air"
-        case .g:
-            "Ground"
-        case .s:
-            "Sea Surface"
-        case .u:
-            "Subsurface"
-        case .f:
-            "SOF"
-        }
-    }
-    
-    public var description: String {
-        "\(name) (\(rawValue))"
+extension StandardIdentity {
+    static var basic: [StandardIdentity] {
+        [.u, .f, .n, .h]
     }
 }

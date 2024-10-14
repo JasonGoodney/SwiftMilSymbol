@@ -44,19 +44,16 @@ public struct Warfighting: SymbolSet {
     public struct SeaSurface: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
     
     public struct SubSurface: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
     
     public struct Air: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
     
     public struct SpecialOperationsForces: SymbolSet {
@@ -68,24 +65,20 @@ public struct Warfighting: SymbolSet {
     public struct Space: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
     
     public struct GroundEquipment: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
     
     public struct GroundInstallation: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
     
     public struct GroundUnit: SymbolSet {
         public let name: String
         public let mainIcon: [MainIcon]
-        
     }
 }
