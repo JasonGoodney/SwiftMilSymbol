@@ -10,9 +10,12 @@ import Shared
 import MilStd2525c
 
 public struct MilStd2525 {
+    private init() {}
+    
     public static func ms2525c() -> MilStd2525c? {
         do {
-            let json = try JSONSerialization.data(withJSONObject: ms2525cDictionary(), options: [.prettyPrinted])
+            guard let jsonObject = ms2525cDictionary() else { return nil }
+            let json = try JSONSerialization.data(withJSONObject: jsonObject, options: [.prettyPrinted])
             let symbolSet = try JSONDecoder().decode(MilStd2525c.self, from: json)
             return symbolSet
         } catch {

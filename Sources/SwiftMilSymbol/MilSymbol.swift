@@ -6,7 +6,7 @@ import SwiftDraw
 import UIKit
 import Shared
 
-public class MilSymbol {
+public struct MilSymbol {
     private init() {}
     
     public static func image(
