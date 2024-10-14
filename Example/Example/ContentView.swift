@@ -10,21 +10,19 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        TabView {
-            OptionsView()
-                .tabItem {
-                    Label("Options", systemImage: "text.below.photo")
+        NavigationStack {
+            List {
+                NavigationLink("MilSymbol with options") {
+                    OptionsView()
+                        .navigationTitle("MilSymbol with options")
                 }
-            
-            GridView()
-                .tabItem {
-                    Label("Grid", systemImage: "square.grid.3x3")
+                
+                NavigationLink("MIL-STD 2525C") {
+                    MilStd2525CView()
+                        .navigationTitle("MIL-STD 2525C")
                 }
-            
-            MilStd2525CView()
-                .tabItem {
-                    Label("MilStd2525C", systemImage: "square.grid.3x1.below.line.grid.1x2.fill")
-                }
+            }
+            .navigationTitle("Example")
         }
     }
 }

@@ -7,60 +7,83 @@
 
 import SwiftUI
 import SwiftMilSymbol
+import MilStd2525c
 
 struct MilStd2525CView: View {
-    let milSymbol = MilSymbol.shared
     let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 6)
+    var battleDimensions: [BattleDimension: [MainIcon]] = [:]
     
-    var codes: [String] {
-        Affiliation.allCases.flatMap { aff in
-            try! milSymbol.milStd2525c()!.war.icons.map { icon in icon.sidc(aff)
-            }
+    init() {
+       let warfighting = MilStd2525.ms2525c()!.warfighting
+        for bd in BattleDimension.allCases {
+            battleDimensions[bd] = warfighting.mainIcon.filter { $0.battledimension.uppercased() == bd.rawValue }
         }
-        
     }
     
     @State private var searchQuery = ""
+    @State private var affiliation: StandardIdentity = .f
     
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                LazyVGrid(columns: columns, pinnedViews: [.sectionHeaders]) {
-                    ForEach(Affiliation.allCases) { aff in
-                        Section {
-                            let codes = try! milSymbol.milStd2525c()!.war.icons.filter {
-                                if searchQuery.isEmpty {
-                                    return true
-                                } else {
-                                    return $0.name.lowercased().contains(searchQuery.lowercased())
-                                }
+        ScrollView {
+            LazyVGrid(columns: columns, pinnedViews: [.sectionHeaders]) {
+                ForEach(BattleDimension.allCases) { bd in
+                    Section {
+                        let codes = battleDimensions[bd]!.filter {
+                            if searchQuery.isEmpty {
+                                return true
+                            } else {
+                                return $0.name.lowercased().contains(searchQuery.lowercased())
                             }
-                            .map { icon in icon.sidc(aff) }
-                            
-                            ForEach(codes, id: \.self) { sidc in
-                                if let image = milSymbol.image(sidc) {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 30)
-                                }
-                            }
-                        } header: {
-                            HStack {
-                                Text(aff.name)
-                                Spacer()
-                            }
-                            .padding()
-                            .background(.gray)
                         }
+                        .map { icon in icon.sidc(affiliation) }
+                        
+                        ForEach(codes, id: \.self) { sidc in
+                            if let image = MilSymbol.image(sidc) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 30)
+                            }
+                        }
+                    } header: {
+                        HStack {
+                            Text(bd.description)
+                            Spacer()
+                        }
+                        .padding(10)
+                        .background(Color(uiColor: .systemBackground))
                     }
                 }
             }
-            .searchable(text: $searchQuery)
+        }
+        .searchable(text: $searchQuery)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Menu {
+                    Picker(selection: $affiliation) {
+                        ForEach(StandardIdentity.allCases) { aff in
+                            let image = MilSymbol.image("S\(aff.rawValue)G---------")!
+                            HStack {
+                                Text(aff.description)
+                                Spacer()
+                                Image(uiImage: image)
+                            }
+                        }
+                    } label: {
+                        Text("Standard Identity")
+                    }
+                } label: {
+                    let image = MilSymbol.image("S\(affiliation.rawValue)G---------")!
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 30)
+                }
+            }
         }
     }
 }
 
 #Preview {
-    GridView()
+    MilStd2525CView()
 }

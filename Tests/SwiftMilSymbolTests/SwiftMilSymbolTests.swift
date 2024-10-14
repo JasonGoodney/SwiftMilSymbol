@@ -4,11 +4,11 @@ import UIKit
 
 final class SwiftMilSymbolTests: XCTestCase {
     func testExample() throws {
-        XCTAssertNotNil(MilSymbol.shared.image("SFG-UCI----D"))
+        XCTAssertNotNil(MilSymbol.image("SFG-UCI----D"))
     }
     
     func testMilStd2525c() throws {
-        let ms2525c = try MilSymbol.shared.milStd2525c()
+        let ms2525c = MilStd2525.ms2525c()
         XCTAssertNotNil(ms2525c)
     }
 }

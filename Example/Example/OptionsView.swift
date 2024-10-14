@@ -9,10 +9,8 @@ import SwiftUI
 import SwiftMilSymbol
 
 struct OptionsView: View {
-    let milSymbol = MilSymbol.shared
-    
     var body: some View {
-        if let image = milSymbol.image("sfgpewrh--mt", options: [
+        if let image = MilSymbol.image("sfgpewrh--mt", options: [
             "size": 35,
             "quantity": 200,
             "staffComments": "for reinforcements".uppercased(),
