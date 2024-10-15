@@ -10,7 +10,7 @@ import SwiftMilSymbol
 import MilStd2525c
 
 struct MilStd2525CView: View {
-    let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 6)
+    let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
     var battleDimensions: [BattleDimension: [MainIcon]] = [:]
     
     init() {
@@ -35,14 +35,18 @@ struct MilStd2525CView: View {
                                 return $0.name.lowercased().contains(searchQuery.lowercased())
                             }
                         }
-                        .map { icon in icon.sidc(affiliation) }
+                            .map { icon in icon.sidc(affiliation) }
                         
                         ForEach(codes, id: \.self) { sidc in
                             if let image = MilSymbol.image(sidc) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 30)
+                                VStack(alignment: .center) {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 35)
+                                    Text(sidc)
+                                        .font(.caption2)
+                                }
                             }
                         }
                     } header: {

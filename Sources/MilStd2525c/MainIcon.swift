@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public struct MainIcon: Codable {
+public struct MainIcon: Codable, CustomStringConvertible {
     public let status, codingscheme, name, remarks: String
     public let functionid, battledimension, affiliation, hierarchy: String
     public let names: [String?]
@@ -21,10 +21,18 @@ public struct MainIcon: Codable {
     ///
     /// Also called SIDC. (JP 1-02)
     public var sidc: String {
-        codingscheme + affiliation + battledimension + status + functionid
+        (codingscheme + affiliation + battledimension + status + functionid).uppercased()
     }
     
-    public func sidc(_ standardIdentity: StandardIdentity) -> String {
-        return codingscheme + standardIdentity.rawValue + battledimension + status + functionid
+    public func sidc(_ standardIdentity: StandardIdentity, status: Status = .p) -> String {
+        (codingscheme + standardIdentity.rawValue + battledimension + status.rawValue + functionid).uppercased()
+    }
+    
+    public var description: String {
+        """
+        \(hierarchy)
+        \(names.compactMap { $0 }.joined(separator: "\n"))
+        SIDC: \(sidc.uppercased())
+        """
     }
 }

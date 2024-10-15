@@ -12,9 +12,9 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                NavigationLink("MilSymbol with options") {
+                NavigationLink("MilSymbol") {
                     OptionsView()
-                        .navigationTitle("MilSymbol with options")
+                        .navigationTitle("MilSymbol")
                 }
                 
                 NavigationLink("MIL-STD 2525C") {

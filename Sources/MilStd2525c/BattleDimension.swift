@@ -30,6 +30,9 @@ public enum BattleDimension: String, Codable, CaseIterable, Identifiable, Custom
     /// SOF (F)
     case f = "F"
     
+    /// Other (no frame)
+    case x = "X"
+    
     public var name: String {
         switch self {
         case .z:
@@ -46,6 +49,8 @@ public enum BattleDimension: String, Codable, CaseIterable, Identifiable, Custom
             "Subsurface"
         case .f:
             "SOF"
+        case .x:
+            "Other"
         }
     }
     
