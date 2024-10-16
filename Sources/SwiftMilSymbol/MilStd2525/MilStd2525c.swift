@@ -7,12 +7,21 @@
 
 import Foundation
 
-public struct MilStd2525c: Codable {
+public struct MilStd2525c: MilStd2525c.SymbolSet {
+    public let name = "MIL-STD-2525C"
     public let warfighting: Warfighting
     public let tacticalGraphics: TacticalGraphics
     public let emergencyManagementSymbols: EmergencyManagementSymbols
     public let stabilityOperations: StabilityOperations
     public let signalsIntelligence: SignalsIntelligence
+    
+    public var symbols: [Symbol] {
+        warfighting.symbols
+        + tacticalGraphics.symbols
+        + emergencyManagementSymbols.symbols
+        + stabilityOperations.symbols
+        + signalsIntelligence.symbols
+    }
 
     enum CodingKeys: String, CodingKey {
         case warfighting = "WAR"
