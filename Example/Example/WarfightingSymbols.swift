@@ -1,5 +1,5 @@
 //
-//  GridView.swift
+//  WarfightingSymbols.swift
 //  Example
 //
 //  Created by Jason Goodney on 10/6/24.
@@ -12,7 +12,7 @@ typealias BattleDimension = MilStd2525c.BattleDimension
 typealias Symbol = MilStd2525c.Symbol
 typealias StandardIdentity = MilStd2525c.StandardIdentity
 
-struct MilStd2525CView: View {
+struct WarfightingSymbols: View {
     let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
     var battleDimensions: [BattleDimension: [Symbol]] = [:]
     
@@ -30,35 +30,37 @@ struct MilStd2525CView: View {
         ScrollView {
             LazyVGrid(columns: columns, pinnedViews: [.sectionHeaders]) {
                 ForEach(BattleDimension.allCases) { bd in
-                    Section {
-                        let codes = battleDimensions[bd]!.filter {
-                            if searchQuery.isEmpty {
-                                return true
-                            } else {
-                                return $0.name.lowercased().contains(searchQuery.lowercased())
-                            }
+                    let codes = battleDimensions[bd]!.filter {
+                        if searchQuery.isEmpty {
+                            return true
+                        } else {
+                            return $0.name.lowercased().contains(searchQuery.lowercased())
                         }
-                            .map { icon in icon.sidc(affiliation) }
-                        
-                        ForEach(codes, id: \.self) { sidc in
-                            if let image = MilSymbol.image(sidc) {
-                                VStack(alignment: .center) {
-                                    Image(uiImage: image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 35)
-                                    Text(sidc)
-                                        .font(.caption2)
+                    }
+                    .map { icon in icon.sidc(affiliation) }
+                    
+                    if !codes.isEmpty {
+                        Section {
+                            ForEach(codes, id: \.self) { sidc in
+                                if let image = MilSymbol.image(sidc) {
+                                    VStack(alignment: .center) {
+                                        Image(uiImage: image)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 35)
+                                        Text(sidc)
+                                            .font(.caption2)
+                                    }
                                 }
                             }
+                        } header: {
+                            HStack {
+                                Text(bd.description)
+                                Spacer()
+                            }
+                            .padding(10)
+                            .background(Color(uiColor: .systemBackground))
                         }
-                    } header: {
-                        HStack {
-                            Text(bd.description)
-                            Spacer()
-                        }
-                        .padding(10)
-                        .background(Color(uiColor: .systemBackground))
                     }
                 }
             }
@@ -92,5 +94,5 @@ struct MilStd2525CView: View {
 }
 
 #Preview {
-    MilStd2525CView()
+    WarfightingSymbols()
 }

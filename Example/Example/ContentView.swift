@@ -17,9 +17,9 @@ struct ContentView: View {
                         .navigationTitle("MilSymbol")
                 }
                 
-                NavigationLink("MIL-STD-2525C List") {
-                    MilStd2525CView()
-                        .navigationTitle("MIL-STD-2525C")
+                NavigationLink("Warfighting Symbols") {
+                    WarfightingSymbols()
+                        .navigationTitle("Warfighting Symbols")
                 }
             }
             .navigationTitle("Example")

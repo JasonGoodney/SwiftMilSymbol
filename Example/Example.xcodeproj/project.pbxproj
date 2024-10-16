@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D70A206F2CB77FC100332D83 /* MilStd2525CView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A206E2CB77FC100332D83 /* MilStd2525CView.swift */; };
+		D70A206F2CB77FC100332D83 /* WarfightingSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D70A206E2CB77FC100332D83 /* WarfightingSymbols.swift */; };
 		D72CA0982CA7628800BC0776 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72CA0972CA7628800BC0776 /* ExampleApp.swift */; };
 		D72CA09C2CA7628800BC0776 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72CA09B2CA7628800BC0776 /* Assets.xcassets */; };
 		D72CA09F2CA7628800BC0776 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72CA09E2CA7628800BC0776 /* Preview Assets.xcassets */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D70A206E2CB77FC100332D83 /* MilStd2525CView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilStd2525CView.swift; sourceTree = "<group>"; };
+		D70A206E2CB77FC100332D83 /* WarfightingSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarfightingSymbols.swift; sourceTree = "<group>"; };
 		D72CA0942CA7628800BC0776 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D72CA0972CA7628800BC0776 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D72CA09B2CA7628800BC0776 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 			children = (
 				D72CA0AE2CA7650400BC0776 /* SymbolIdentificationCodes.swift */,
 				D72CA0A92CA7633E00BC0776 /* ContentView.swift */,
-				D70A206E2CB77FC100332D83 /* MilStd2525CView.swift */,
+				D70A206E2CB77FC100332D83 /* WarfightingSymbols.swift */,
 				D7CC7A7D2CB2F0320066F622 /* OptionsView.swift */,
 				D72CA0972CA7628800BC0776 /* ExampleApp.swift */,
 				D72CA09B2CA7628800BC0776 /* Assets.xcassets */,
@@ -164,7 +164,7 @@
 			files = (
 				D72CA0AF2CA7650400BC0776 /* SymbolIdentificationCodes.swift in Sources */,
 				D7CC7A7E2CB2F0330066F622 /* OptionsView.swift in Sources */,
-				D70A206F2CB77FC100332D83 /* MilStd2525CView.swift in Sources */,
+				D70A206F2CB77FC100332D83 /* WarfightingSymbols.swift in Sources */,
 				D72CA0AA2CA7633E00BC0776 /* ContentView.swift in Sources */,
 				D72CA0982CA7628800BC0776 /* ExampleApp.swift in Sources */,
 			);
