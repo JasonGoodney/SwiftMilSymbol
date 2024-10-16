@@ -14,7 +14,7 @@ final class SwiftMilSymbolTests: XCTestCase {
     
     func testFilterMilStd2525cForSIDC() {
         let sidc = "S*G*EWRH--MT"
-        let symbols = MilStd2525.ms2525c()?.warfighting.mainIcon
+        let symbols = MilStd2525.ms2525c()?.warfighting.symbols
         let symbol = symbols?.first(where: { sidc.hasPrefix($0.sidc) })
         XCTAssertNotNil(symbol)
     }

@@ -4,10 +4,8 @@
 import Foundation
 import SwiftDraw
 import UIKit
-import Shared
 
-public struct MilSymbol {
-    private init() {}
+public enum MilSymbol {
     
     public static func image(
         _ code: String,
@@ -35,6 +33,14 @@ public struct MilSymbol {
         let metadata = result["metadata"] as? [AnyHashable: Any]
         
         return Symbol(sidc: code, image: image, metadata: metadata)
+    }
+}
+
+extension MilSymbol {
+    public struct Symbol {
+        public let sidc: String
+        public let image: UIImage
+        public let metadata: [AnyHashable: Any]?
     }
 }
 

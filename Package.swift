@@ -26,18 +26,10 @@ let package = Package(
         .target(
             name: "SwiftMilSymbol",
             dependencies: [
-                "Shared",
-                "MilStd2525c",
                 .product(name: "SwiftDraw", package: "SwiftDraw"),
-            ]
-        ),
-        .target(
-            name: "MilStd2525c"
-        ),
-        .target(
-            name: "Shared",
+            ],
             resources: [
-                .process("JavaScript/dist/SwiftMilSymbol.bundle.js")
+                .process("JSBridge/JavaScript/dist/SwiftMilSymbol.bundle.js")
             ]
         ),
         .testTarget(

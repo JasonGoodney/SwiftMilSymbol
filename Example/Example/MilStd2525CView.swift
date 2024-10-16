@@ -7,16 +7,19 @@
 
 import SwiftUI
 import SwiftMilSymbol
-import MilStd2525c
+
+typealias BattleDimension = MilStd2525c.BattleDimension
+typealias Symbol = MilStd2525c.Symbol
+typealias StandardIdentity = MilStd2525c.StandardIdentity
 
 struct MilStd2525CView: View {
     let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
-    var battleDimensions: [BattleDimension: [MainIcon]] = [:]
+    var battleDimensions: [BattleDimension: [Symbol]] = [:]
     
     init() {
        let warfighting = MilStd2525.ms2525c()!.warfighting
         for bd in BattleDimension.allCases {
-            battleDimensions[bd] = warfighting.mainIcon.filter { $0.battledimension.uppercased() == bd.rawValue }
+            battleDimensions[bd] = warfighting.symbols.filter { $0.battledimension.uppercased() == bd.rawValue }
         }
     }
     

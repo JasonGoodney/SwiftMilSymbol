@@ -28,7 +28,7 @@ struct OptionsView: View {
                 }
             }
             
-            if let symbol = MilStd2525.ms2525c()?.warfighting.mainIcon.first(where: { "S*G*EWRH--MT".hasPrefix($0.sidc) }) {
+            if let symbol = MilStd2525.ms2525c()?.warfighting.symbols.first(where: { "S*G*EWRH--MT".hasPrefix($0.sidc) }) {
                 Section("Description")  {
                     VStack(alignment: .leading) {
                         Text(symbol.hierarchy)

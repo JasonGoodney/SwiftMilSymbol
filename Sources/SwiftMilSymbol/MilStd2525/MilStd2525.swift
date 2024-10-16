@@ -6,11 +6,8 @@
 //
 
 import Foundation
-import Shared
-import MilStd2525c
 
-public struct MilStd2525 {
-    private init() {}
+public enum MilStd2525 {
     
     public static func ms2525c() -> MilStd2525c? {
         do {
