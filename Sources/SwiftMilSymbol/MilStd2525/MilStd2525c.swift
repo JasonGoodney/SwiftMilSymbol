@@ -34,6 +34,8 @@ extension MilStd2525c {
 
 extension MilStd2525c {
     
+    /// Warfighting (WAR)
+    ///
     ///  Symbology used to plan and execute military operations in support of C2 functions.
     ///  These symbols fall into two basic categories: tactical symbols and tactical graphics.
     public struct Warfighting: SymbolSet {
@@ -70,6 +72,7 @@ extension MilStd2525c {
             case subSurface = "SBSUF"
         }
         
+        /// Sea Surface (SSUF)
         public struct SeaSurface: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -80,6 +83,7 @@ extension MilStd2525c {
             }
         }
         
+        /// Subsurface (SBSUF)
         public struct SubSurface: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -90,6 +94,7 @@ extension MilStd2525c {
             }
         }
         
+        /// Air (AIRTRK)
         public struct Air: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -100,6 +105,7 @@ extension MilStd2525c {
             }
         }
         
+        /// Special Operations Forces (SOFUNT)
         public struct SpecialOperationsForces: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -110,6 +116,7 @@ extension MilStd2525c {
             }
         }
         
+        /// Space (SPC)
         public struct Space: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -120,6 +127,7 @@ extension MilStd2525c {
             }
         }
         
+        /// Ground Equipment (GRDTRK_EQT)
         public struct GroundEquipment: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -130,6 +138,7 @@ extension MilStd2525c {
             }
         }
         
+        /// Ground Installation (GRDTRK_INS)
         public struct GroundInstallation: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -140,6 +149,8 @@ extension MilStd2525c {
             }
         }
         
+        
+        /// Ground Unit (GRDTRK_UNT)
         public struct GroundUnit: SymbolSet {
             public let name: String
             public let symbols: [Symbol]
@@ -152,10 +163,12 @@ extension MilStd2525c {
     }
 }
 
-// MARK: - TacticalGraphics
+// MARK: - Tactical Graphics
 
 extension MilStd2525c {
     
+    /// Tactical Graphics (TACGRP)
+    ///
     /// A category of warfighting symbology that provides
     /// information about objects necessary for battlefield
     /// planning and management.
@@ -171,10 +184,12 @@ extension MilStd2525c {
 
 }
 
-// MARK: - StabilityOperations
+// MARK: - Stability Operations
 
 extension MilStd2525c {
-    
+
+    /// Stability Operations (STBOPS)
+    ///
     /// An overarching term encompassing various military
     /// missions, tasks, and activities conducted outside
     /// the United States in coordination with other instruments
@@ -193,10 +208,12 @@ extension MilStd2525c {
 
 }
 
-// MARK: - SignalsIntelligence
+// MARK: - Signals Intelligence
 
 extension MilStd2525c {
     
+    /// Signals Intelligence (SIGNIT)
+    ///
     /// 1. A category of intelligence comprising either individually
     /// or in combination all communications intelligence, electronics
     /// intelligence, and foreign instrumentation signals intelligence,
@@ -218,10 +235,11 @@ extension MilStd2525c {
 
 }
 
-// MARK: - EmergencyManagementSymbols
+// MARK: - Emergency Management Symbols
 
 extension MilStd2525c {
     
+    /// Emergency Management Symbols (EMS)
     public struct EmergencyManagementSymbols: SymbolSet {
         public let name: String
         public let symbols: [Symbol]
@@ -271,6 +289,7 @@ extension MilStd2525c {
 // MARK: - Standard Identity
 
 extension MilStd2525c {
+    
     /// Standard Identity (Affiliation) refers to the threat posed by the warfighting object being represented.
     public enum StandardIdentity: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
         public var id: StandardIdentity { self }
@@ -346,50 +365,39 @@ extension MilStd2525c {
         
         public var name: String {
             switch self {
-            case .p:
-                "PENDING"
-            case .u:
-                "UNKNOWN"
-            case .f:
-                "FRIEND"
-            case .n:
-                "NEUTRAL"
-            case .h:
-                "HOSTILE"
-            case .a:
-                "ASSUMED FRIEND"
-            case .s:
-                "SUSPECT"
-            case .g:
-                "EXERCISE PENDING"
-            case .w:
-                "EXERCISE UNKNOWN"
-            case .d:
-                "EXERCISE FRIEND"
-            case .l:
-                "EXERCISE NEUTRAL"
-            case .m:
-                "EXERCISE ASSUMED FRIEND"
-            case .j:
-                "JOKER"
-            case .k:
-                "FAKER"
+            case .p: "PENDING"
+            case .u: "UNKNOWN"
+            case .f: "FRIEND"
+            case .n: "NEUTRAL"
+            case .h: "HOSTILE"
+            case .a: "ASSUMED FRIEND"
+            case .s: "SUSPECT"
+            case .g: "EXERCISE PENDING"
+            case .w: "EXERCISE UNKNOWN"
+            case .d: "EXERCISE FRIEND"
+            case .l: "EXERCISE NEUTRAL"
+            case .m: "EXERCISE ASSUMED FRIEND"
+            case .j: "JOKER"
+            case .k: "FAKER"
             }
         }
         
         public var description: String {
             "\(name) (\(rawValue))"
         }
-    }
-    
-    static var basic: [StandardIdentity] {
-        [.u, .f, .n, .h]
+        
+        /// Basic standard identities: UNKNOWN, FRIEND, NEUTRAL, HOSTILE.
+        static var basic: [StandardIdentity] {
+            [.u, .f, .n, .h]
+        }
     }
 }
 
 // MARK: - Battle Dimension
 
 extension MilStd2525c {
+    
+    /// Battle dimension indicates the primary mission area of the object being symbolized.
     public enum BattleDimension: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
         public var id: BattleDimension { self }
         
@@ -419,22 +427,14 @@ extension MilStd2525c {
         
         public var name: String {
             switch self {
-            case .z:
-                "Unknown"
-            case .p:
-                "Space"
-            case .a:
-                "Air"
-            case .g:
-                "Ground"
-            case .s:
-                "Sea Surface"
-            case .u:
-                "Subsurface"
-            case .f:
-                "SOF"
-            case .x:
-                "Other"
+            case .z: "UNKNOWN"
+            case .p: "SPACE"
+            case .a: "AIR"
+            case .g: "GROUND"
+            case .s: "SEA SURFACE"
+            case .u: "SEA SUBSURFACE"
+            case .f: "SOF"
+            case .x: "OTHER"
             }
         }
         
@@ -448,25 +448,43 @@ extension MilStd2525c {
 // MARK: - Status
 
 extension MilStd2525c {
-    public enum Status: String, Codable, CaseIterable, Identifiable {
+    
+    /// Status indicates whether an object is at the portrayed location or is intended
+    /// or projected to be at that location at some point in time in the future.
+    public enum Status: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
         public var id: Status { self }
         
-        /// ANTICIPATED/PLANNED
+        /// ANTICIPATED/PLANNED (A)
         case a = "A"
         
-        /// PRESENT (Units only)
+        /// PRESENT (Units only) (P)
         case p = "P"
         
-        /// PRESENT/FULLY CAPABLE
+        /// PRESENT/FULLY CAPABLE (C)
         case c = "C"
         
-        /// PRESENT/DAMAGED
+        /// PRESENT/DAMAGED (D)
         case d = "D"
         
-        /// PRESENT/DESTROYED
+        /// PRESENT/DESTROYED (X)
         case x = "X"
         
-        /// PRESENT/FULL TO CAPACITY
+        /// PRESENT/FULL TO CAPACITY (X)
         case f = "F"
+        
+        public var name: String {
+            switch self {
+            case .a: "ANTICIPATED"
+            case .p: "PRESENT"
+            case .c: "FULLY CAPABLE"
+            case .d: "DAMAGED"
+            case .x: "DESTROYED"
+            case .f: "FULL TO CAPACITY"
+            }
+        }
+        
+        public var description: String {
+            "\(name) (\(rawValue))"
+        }
     }
 }
