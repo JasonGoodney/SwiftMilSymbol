@@ -410,28 +410,28 @@ extension MilStd2525c {
     public enum BattleDimension: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
         public var id: BattleDimension { self }
         
-        /// Unknown (Z)
+        /// UNKNOWN (Z)
         case z = "Z"
         
-        /// Space (P)
+        /// SPACE (P)
         case p = "P"
         
-        /// Air (A)
+        /// AIR (A)
         case a = "A"
         
-        /// Ground (G)
+        /// GROUND (G)
         case g = "G"
         
-        /// Sea Surface (S)
+        /// SEA SURFACE (S)
         case s = "S"
         
-        /// Subsurface (U)
+        /// SUBSURFACE (U)
         case u = "U"
         
         /// SOF (F)
         case f = "F"
         
-        /// Other (no frame)
+        /// OTHER (no frame)
         case x = "X"
         
         public var name: String {
