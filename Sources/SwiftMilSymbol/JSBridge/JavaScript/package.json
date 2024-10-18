@@ -11,6 +11,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "mil-std-2525": "^0.2.8",
     "milsymbol": "^2.2.0"
   },
   "devDependencies": {

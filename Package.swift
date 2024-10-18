@@ -29,7 +29,7 @@ let package = Package(
                 .product(name: "SwiftDraw", package: "SwiftDraw"),
             ],
             resources: [
-                .process("JavaScript/dist/SwiftMilSymbol.bundle.js")
+                .process("JSBridge/JavaScript/dist/SwiftMilSymbol.bundle.js")
             ]
         ),
         .testTarget(

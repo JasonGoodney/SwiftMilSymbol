@@ -10,16 +10,19 @@ import SwiftUI
 struct ContentView: View {
     
     var body: some View {
-        TabView {
-            OptionsView()
-                .tabItem {
-                    Label("Options", systemImage: "text.below.photo")
+        NavigationStack {
+            List {
+                NavigationLink("MilSymbol Example") {
+                    OptionsView()
+                        .navigationTitle("MilSymbol")
                 }
-            
-            GridView()
-                .tabItem {
-                    Label("Grid", systemImage: "square.grid.3x3")
+                
+                NavigationLink("Warfighting Symbols") {
+                    WarfightingSymbols()
+                        .navigationTitle("Warfighting Symbols")
                 }
+            }
+            .navigationTitle("Example")
         }
     }
 }
