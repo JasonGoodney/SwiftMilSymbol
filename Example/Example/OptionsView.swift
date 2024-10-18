@@ -13,7 +13,7 @@ struct OptionsView: View {
     
     var body: some View {
         List {
-            if let image = MilSymbol.image(sidc, options: [
+            if let image = MilSymbol.symbol(sidc, options: [
                 "size": 35,
                 "quantity": 200,
                 "staffComments": "for reinforcements".uppercased(),
@@ -22,7 +22,7 @@ struct OptionsView: View {
                 "type": "machine gun".uppercased(),
                 "dtg": "30140000ZSEP97",
                 "location": "0900000.0E570306.0N"
-            ]) {
+            ])?.image {
                 Section("Symbol") {
                     Image(uiImage: image)
                 }

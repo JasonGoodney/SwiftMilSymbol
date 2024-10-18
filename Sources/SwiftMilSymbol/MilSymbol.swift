@@ -5,42 +5,59 @@ import Foundation
 import SwiftDraw
 import UIKit
 
+/// Available symbol options: https://github.com/spatialillusions/milsymbol/blob/master/src/ms/symbol.js
+public typealias SymbolOptions = [AnyHashable: Any]
+
+public typealias SymbolMetadata = [AnyHashable: Any]
+
 public enum MilSymbol {
     
     public static func image(
         _ code: String,
-        options: [AnyHashable: Any]? = nil
+        options: SymbolOptions? = nil
     ) -> UIImage? {
         guard let result = milSymbolResult(code, options: options) else { return nil }
                 
         return image(dataURL: result["dataURL"] as? String)
     }
     
-    public static func symbolDictionary(
-        _ code: String,
-        options: [AnyHashable: Any]? = nil
-    ) -> [AnyHashable: Any]? {
-        milSymbolResult(code, options: options)
-    }
-    
     public static func symbol(
         _ code: String,
-        options: [AnyHashable: Any]? = nil
+        options: SymbolOptions? = nil
     ) -> Symbol? {
         guard let result = milSymbolResult(code, options: options) else { return nil }
-        guard let image = image(dataURL: result["dataURL"] as? String) else { return nil }
-        
-        let metadata = result["metadata"] as? [AnyHashable: Any]
-        
-        return Symbol(sidc: code, image: image, metadata: metadata)
+
+        return Symbol(
+            sidc: result["sidc"] as? String ?? code,
+            svg: result["svg"] as? String,
+            dataURL: result["dataURL"] as? String,
+            metadata: result["metadata"] as? SymbolMetadata,
+            options: result["options"] as? SymbolOptions
+        )
+    }
+    
+    public static func symbolDictionary(
+        _ code: String,
+        options: SymbolOptions? = nil
+    ) -> [AnyHashable: Any]? {
+        milSymbolResult(code, options: options)
     }
 }
 
 extension MilSymbol {
     public struct Symbol {
         public let sidc: String
-        public let image: UIImage
-        public let metadata: [AnyHashable: Any]?
+        public let svg: String?
+        public let dataURL: String?
+        public let metadata: SymbolMetadata?
+        public let options: SymbolOptions?
+        
+        public var image: UIImage? {
+            guard let dataURL else { return nil }
+            guard let url = URL(string: dataURL) else { return nil }
+            guard let svg =  SVG(fileURL: url) else { return nil }
+            return svg.rasterize()
+        }
     }
 }
 
