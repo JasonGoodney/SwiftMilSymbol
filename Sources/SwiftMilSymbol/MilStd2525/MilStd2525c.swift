@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// https://worldwind.arc.nasa.gov/milstd2525c/Mil-STD-2525C.pdf
 public struct MilStd2525c: MilStd2525c.SymbolSet {
     public let name = "MIL-STD-2525C"
     public let warfighting: Warfighting
@@ -266,9 +267,27 @@ extension MilStd2525c {
 extension MilStd2525c {
     
     public struct Symbol: Codable, CustomStringConvertible {
-        public let status, codingscheme, name, remarks: String
-        public let functionid, battledimension, affiliation, hierarchy: String
+        public let codingScheme: String
+        public let standardIdentity: String
+        public let battleDimension: String
+        public let status: String
+        public let functionID: String
+        public let hierarchy: String
+        public let name: String
         public let names: [String?]
+        public let remarks: String
+        
+        private enum CodingKeys: String, CodingKey {
+            case status
+            case codingScheme = "codingscheme"
+            case name
+            case remarks
+            case functionID = "functionid"
+            case battleDimension = "battledimension"
+            case standardIdentity = "affiliation"
+            case hierarchy
+            case names
+        }
         
         /// Symbol identification code
         ///
@@ -278,11 +297,11 @@ extension MilStd2525c {
         ///
         /// Also called SIDC. (JP 1-02)
         public var sidc: String {
-            (codingscheme + affiliation + battledimension + status + functionid).uppercased()
+            (codingScheme + standardIdentity + battleDimension + status + functionID).uppercased()
         }
         
-        public func sidc(_ standardIdentity: StandardIdentity, status: Status = .p) -> String {
-            (codingscheme + standardIdentity.rawValue + battledimension + status.rawValue + functionid).uppercased()
+        public func sidc(_ standardIdentity: StandardIdentity, status: Status = .present) -> String {
+            (codingScheme + standardIdentity.rawValue + battleDimension + status.rawValue + functionID).uppercased()
         }
         
         public var description: String {
@@ -306,25 +325,25 @@ extension MilStd2525c {
         /// PENDING (P)
         ///
         /// A track which has not been subjected to the identification process. (MIL-STD-6016)
-        case p = "P"
+        case pending = "P"
         
         /// UNKNOWN (U)
         ///
         /// An identity applied to an evaluated track which that
         /// has not been identified. (MIL-STD-6016) (JP 1-02)
-        case u = "U"
+        case unknown = "U"
         
         /// FRIEND (F)
         ///
         /// A track belonging to a declared friendly nation. (MIL-STD-6016)
-        case f = "F"
+        case friend = "F"
         
         /// NEUTRAL (N)
         ///
         /// A track or contact whose characteristics, behavior, origin,
         /// or nationality indicate that it is neither supporting nor
         /// opposing friendly forces. (MIL-STD-6016)
-        case n = "N"
+        case neutral = "N"
         
         /// HOSTILE (H)
         ///
@@ -332,62 +351,62 @@ extension MilStd2525c {
         /// group, or entity, which by virtue of its behavior or information
         /// collected on it such as characteristics, origin or nationality
         /// contributes to the threat to friendly forces. (MIL-STD-6016)
-        case h = "H"
+        case hostile = "H"
         
         /// ASSUMED FRIEND (A)
         ///
         /// A track which is assumed to be a friend because of
         /// its characteristics, behavior, or origin. (MIL-STD-6016)
-        case a = "A"
+        case assumedFriend = "A"
         
         /// SUSPECT (S)
         ///
         /// An identity applied to a track that is potentially hostile
         /// because of its characteristics, behavior, origin, or
         /// nationality. (JP 1-02; Source: JP 3-07.4)
-        case s = "S"
+        case suspect = "S"
         
         /// EXERCISE PENDING (G)
-        case g = "G"
+        case exercisePending = "G"
         
         /// EXERCISE UNKNOWN (W)
-        case w = "W"
+        case exerciseUnknown = "W"
         
         /// EXERCISE FRIEND (D)
-        case d = "D"
+        case exerciseFriend = "D"
         
         /// EXERCISE NEUTRAL (L)
-        case l = "L"
+        case exerciseNeutral = "L"
         
         /// EXERCISE ASSUMED FRIEND (M)
-        case m = "M"
+        case exerciseAssumedFriend = "M"
         
         /// JOKER (J)
         ///
         /// A friendly track as a suspect for exercise purposes. (MIL-STD-6016)
-        case j = "J"
+        case joker = "J"
         
         /// FAKER (K)
         ///
         /// A friendly track acting as a hostile for exercise purposes. (MIL-STD-6016)
-        case k = "K"
+        case faker = "K"
         
         public var name: String {
             switch self {
-            case .p: "PENDING"
-            case .u: "UNKNOWN"
-            case .f: "FRIEND"
-            case .n: "NEUTRAL"
-            case .h: "HOSTILE"
-            case .a: "ASSUMED FRIEND"
-            case .s: "SUSPECT"
-            case .g: "EXERCISE PENDING"
-            case .w: "EXERCISE UNKNOWN"
-            case .d: "EXERCISE FRIEND"
-            case .l: "EXERCISE NEUTRAL"
-            case .m: "EXERCISE ASSUMED FRIEND"
-            case .j: "JOKER"
-            case .k: "FAKER"
+            case .pending: "PENDING"
+            case .unknown: "UNKNOWN"
+            case .friend: "FRIEND"
+            case .neutral: "NEUTRAL"
+            case .hostile: "HOSTILE"
+            case .assumedFriend: "ASSUMED FRIEND"
+            case .suspect: "SUSPECT"
+            case .exercisePending: "EXERCISE PENDING"
+            case .exerciseUnknown: "EXERCISE UNKNOWN"
+            case .exerciseFriend: "EXERCISE FRIEND"
+            case .exerciseNeutral: "EXERCISE NEUTRAL"
+            case .exerciseAssumedFriend: "EXERCISE ASSUMED FRIEND"
+            case .joker: "JOKER"
+            case .faker: "FAKER"
             }
         }
         
@@ -397,7 +416,7 @@ extension MilStd2525c {
         
         /// Basic standard identities: UNKNOWN, FRIEND, NEUTRAL, HOSTILE.
         static var basic: [StandardIdentity] {
-            [.u, .f, .n, .h]
+            [.unknown, .friend, .neutral, .hostile]
         }
     }
 }
@@ -411,39 +430,39 @@ extension MilStd2525c {
         public var id: BattleDimension { self }
         
         /// UNKNOWN (Z)
-        case z = "Z"
+        case unknown = "Z"
         
         /// SPACE (P)
-        case p = "P"
+        case space = "P"
         
         /// AIR (A)
-        case a = "A"
+        case air = "A"
         
         /// GROUND (G)
-        case g = "G"
+        case ground = "G"
         
         /// SEA SURFACE (S)
-        case s = "S"
+        case seaSurface = "S"
         
-        /// SUBSURFACE (U)
-        case u = "U"
+        /// SEA SUBSURFACE (U)
+        case seaSubsurface = "U"
         
-        /// SOF (F)
-        case f = "F"
+        /// Special Operations Forces (SOF) (F)
+        case specialOperationsForces = "F"
         
         /// OTHER (no frame)
-        case x = "X"
+        case other = "X"
         
         public var name: String {
             switch self {
-            case .z: "UNKNOWN"
-            case .p: "SPACE"
-            case .a: "AIR"
-            case .g: "GROUND"
-            case .s: "SEA SURFACE"
-            case .u: "SEA SUBSURFACE"
-            case .f: "SOF"
-            case .x: "OTHER"
+            case .unknown: "UNKNOWN"
+            case .space: "SPACE"
+            case .air: "AIR"
+            case .ground: "GROUND"
+            case .seaSurface: "SEA SURFACE"
+            case .seaSubsurface: "SEA SUBSURFACE"
+            case .specialOperationsForces: "SOF"
+            case .other: "OTHER"
             }
         }
         
@@ -464,31 +483,31 @@ extension MilStd2525c {
         public var id: Status { self }
         
         /// ANTICIPATED/PLANNED (A)
-        case a = "A"
+        case anticipated = "A"
         
         /// PRESENT (Units only) (P)
-        case p = "P"
+        case present = "P"
         
         /// PRESENT/FULLY CAPABLE (C)
-        case c = "C"
+        case fullyCapable = "C"
         
         /// PRESENT/DAMAGED (D)
-        case d = "D"
+        case damaged = "D"
         
         /// PRESENT/DESTROYED (X)
-        case x = "X"
+        case destroyed = "X"
         
         /// PRESENT/FULL TO CAPACITY (X)
-        case f = "F"
+        case fullToCapacity = "F"
         
         public var name: String {
             switch self {
-            case .a: "ANTICIPATED"
-            case .p: "PRESENT"
-            case .c: "FULLY CAPABLE"
-            case .d: "DAMAGED"
-            case .x: "DESTROYED"
-            case .f: "FULL TO CAPACITY"
+            case .anticipated: "ANTICIPATED"
+            case .present: "PRESENT"
+            case .fullyCapable: "FULLY CAPABLE"
+            case .damaged: "DAMAGED"
+            case .destroyed: "DESTROYED"
+            case .fullToCapacity: "FULL TO CAPACITY"
             }
         }
         

@@ -1,5 +1,5 @@
 //
-//  WarfightingSymbols.swift
+//  MilStd2525cSymbols.swift
 //  Example
 //
 //  Created by Jason Goodney on 10/6/24.
@@ -8,23 +8,26 @@
 import SwiftUI
 import SwiftMilSymbol
 
-typealias BattleDimension = MilStd2525c.BattleDimension
-typealias Symbol = MilStd2525c.Symbol
-typealias StandardIdentity = MilStd2525c.StandardIdentity
+private typealias BattleDimension = MilStd2525c.BattleDimension
+private typealias Symbol = MilStd2525c.Symbol
+private typealias StandardIdentity = MilStd2525c.StandardIdentity
 
-struct WarfightingSymbols: View {
-    let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
-    var battleDimensions: [BattleDimension: [Symbol]] = [:]
+struct MilStd2525cSymbols: View {
+    @State private var searchQuery = ""
+    @State private var affiliation: StandardIdentity = .friend
     
-    init() {
-       let warfighting = MilStd2525.ms2525c()!.warfighting
+    let columns: [GridItem] = Array(repeating: GridItem(.flexible()), count: 5)
+    private var battleDimensions: [BattleDimension: [Symbol]] = [:]
+    
+    let symbolSet: MilStd2525c.SymbolSet
+    
+    init(symbolSet: MilStd2525c.SymbolSet) {
+        self.symbolSet = symbolSet
+        
         for bd in BattleDimension.allCases {
-            battleDimensions[bd] = warfighting.symbols.filter { $0.battledimension.uppercased() == bd.rawValue }
+            battleDimensions[bd] = symbolSet.symbols.filter { $0.battleDimension.uppercased() == bd.rawValue }
         }
     }
-    
-    @State private var searchQuery = ""
-    @State private var affiliation: StandardIdentity = .f
     
     var body: some View {
         ScrollView {
@@ -65,6 +68,7 @@ struct WarfightingSymbols: View {
                 }
             }
         }
+        .navigationTitle(symbolSet.name)
         .searchable(text: $searchQuery)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -94,5 +98,5 @@ struct WarfightingSymbols: View {
 }
 
 #Preview {
-    WarfightingSymbols()
+    MilStd2525cSymbols(symbolSet: MilStd2525.ms2525c()!.warfighting)
 }
