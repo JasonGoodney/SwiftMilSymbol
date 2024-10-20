@@ -267,7 +267,7 @@ extension MilStd2525c {
 extension MilStd2525c {
     
     public struct Symbol: Codable, CustomStringConvertible {
-        public let codingScheme: String
+        public let codingScheme: CodingScheme
         public let standardIdentity: String
         public let battleDimension: String
         public let status: String
@@ -297,11 +297,23 @@ extension MilStd2525c {
         ///
         /// Also called SIDC. (JP 1-02)
         public var sidc: String {
-            (codingScheme + standardIdentity + battleDimension + status + functionID).uppercased()
+            let sidc = codingScheme.rawValue
+            + standardIdentity
+            + battleDimension
+            + status
+            + functionID
+            
+            return sidc.uppercased()
         }
         
         public func sidc(_ standardIdentity: StandardIdentity, status: Status = .present) -> String {
-            (codingScheme + standardIdentity.rawValue + battleDimension + status.rawValue + functionID).uppercased()
+            let sidc = codingScheme.rawValue
+            + standardIdentity.rawValue
+            + battleDimension
+            + status.rawValue
+            + functionID
+            
+            return sidc.uppercased()
         }
         
         public var description: String {
@@ -447,11 +459,8 @@ extension MilStd2525c {
         /// SEA SUBSURFACE (U)
         case seaSubsurface = "U"
         
-        /// Special Operations Forces (SOF) (F)
+        /// SPECIAL OPERATIONS FORCES (SOF) (F)
         case specialOperationsForces = "F"
-        
-        /// OTHER (no frame)
-        case other = "X"
         
         public var name: String {
             switch self {
@@ -462,7 +471,6 @@ extension MilStd2525c {
             case .seaSurface: "SEA SURFACE"
             case .seaSubsurface: "SEA SUBSURFACE"
             case .specialOperationsForces: "SOF"
-            case .other: "OTHER"
             }
         }
         
@@ -508,6 +516,49 @@ extension MilStd2525c {
             case .damaged: "PRESENT/DAMAGED"
             case .destroyed: "PRESENT/DESTROYED"
             case .fullToCapacity: "PRESENT/FULL TO CAPACITY"
+            }
+        }
+        
+        public var description: String {
+            "\(name) (\(rawValue))"
+        }
+    }
+}
+
+// MARK: - Coding Scheme
+
+extension MilStd2525c {
+    
+    /// Indicates to which overall symbology set a symbol/graphic belongs.
+    public enum CodingScheme: String, Codable, CaseIterable, Identifiable, CustomStringConvertible {
+        public var id: CodingScheme { self }
+        
+        /// EMERGENCY MANAGEMENT SYMBOLS (E)
+        case emergencyManagementSymbols = "E"
+        
+        /// TACTICAL GRAPHICS (G)
+        case tacticalGraphics = "G"
+        
+        /// INTELLIGENCE (I)
+        case intelligence = "I"
+        
+        /// STABILITY OPERATIONS (SO) (O)
+        case stabilityOperations = "O"
+        
+        /// WARFIGHTING (S)
+        case warfighting = "S"
+        
+        /// METEOROLOGICAL AND OCEANOGRAPHIC (METOC) (W)
+        case metoc = "W"
+        
+        public var name: String {
+            switch self {
+            case .emergencyManagementSymbols: "EMERGENCY MANAGEMENT SYMBOLS"
+            case .tacticalGraphics: "TACTICAL GRAPHICS"
+            case .intelligence: "INTELLIGENCE"
+            case .stabilityOperations: "STABILITY OPERATIONS"
+            case .warfighting: "WARFIGHTING"
+            case .metoc: "METOC"
             }
         }
         
