@@ -35,11 +35,9 @@ struct OptionsView: View {
                             .fontWeight(.bold)
                         
                         ForEach(symbol.names.indices, id: \.self) { index in
-                            if let name = symbol.names[index] {
-                                Text(name)
-                                    .foregroundStyle(index == symbol.names.count - 1 ? .primary : .secondary)
-                                    .fontWeight(index == symbol.names.count - 1 ? .bold : .regular)
-                            }
+                            Text(symbol.names[index])
+                                .foregroundStyle(index == symbol.names.count - 1 ? .primary : .secondary)
+                                .fontWeight(index == symbol.names.count - 1 ? .bold : .regular)
                         }
                         
                         HStack(spacing: 0) {

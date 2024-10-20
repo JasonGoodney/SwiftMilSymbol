@@ -23,6 +23,11 @@ struct ContentView: View {
                         .navigationTitle("MilSymbol")
                 }
                 
+                NavigationLink("MilSymbol Search") {
+                    MilSymbolSearch()
+                        .navigationTitle("MilSymbol Search")
+                }
+                
 
                 Section(ms2525c.name) {
                     NavigationLink(ms2525c.warfighting.name) {
