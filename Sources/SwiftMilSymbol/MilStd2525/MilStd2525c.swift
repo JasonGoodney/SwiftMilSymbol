@@ -274,7 +274,7 @@ extension MilStd2525c {
         public let functionID: String
         public let hierarchy: String
         public let name: String
-        public let names: [String?]
+        public let names: [String]
         public let remarks: String
         
         private enum CodingKeys: String, CodingKey {
@@ -287,6 +287,20 @@ extension MilStd2525c {
             case standardIdentity = "affiliation"
             case hierarchy
             case names
+        }
+        
+        public init(from decoder: any Decoder) throws {
+            let container: KeyedDecodingContainer<CodingKeys> = try decoder.container(keyedBy: CodingKeys.self)
+            self.status = try container.decode(String.self, forKey: .status)
+            self.codingScheme = try container.decode(MilStd2525c.CodingScheme.self, forKey: .codingScheme)
+            self.name = try container.decode(String.self, forKey: .name)
+            self.remarks = try container.decode(String.self, forKey: .remarks)
+            self.functionID = try container.decode(String.self, forKey: .functionID)
+            self.battleDimension = try container.decode(String.self, forKey: .battleDimension)
+            self.standardIdentity = try container.decode(String.self, forKey: .standardIdentity)
+            self.hierarchy = try container.decode(String.self, forKey: .hierarchy)
+            let optionalNames = try container.decode([String?].self, forKey: .names)
+            self.names = optionalNames.compactMap { $0 }
         }
         
         /// Symbol identification code
