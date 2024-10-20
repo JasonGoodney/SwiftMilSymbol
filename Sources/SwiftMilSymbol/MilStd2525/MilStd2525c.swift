@@ -502,12 +502,12 @@ extension MilStd2525c {
         
         public var name: String {
             switch self {
-            case .anticipated: "ANTICIPATED"
+            case .anticipated: "ANTICIPATED/PLANNED"
             case .present: "PRESENT"
-            case .fullyCapable: "FULLY CAPABLE"
-            case .damaged: "DAMAGED"
-            case .destroyed: "DESTROYED"
-            case .fullToCapacity: "FULL TO CAPACITY"
+            case .fullyCapable: "PRESENT/FULLY CAPABLE"
+            case .damaged: "PRESENT/DAMAGED"
+            case .destroyed: "PRESENT/DESTROYED"
+            case .fullToCapacity: "PRESENT/FULL TO CAPACITY"
             }
         }
         
